@@ -26,17 +26,14 @@ int main() {
   vi x(n), y(n);
   rep(i, 0, n) cin >> x[i] >> y[i];
 
-  ll sx = 0, sy = 0;
+  ll ans = 0;
+
+  sort(all(x));
+  sort(all(y));
 
   rep(i, 0, n) {
-    sx += x[i];
-    sy += y[i];
+    ans += abs(x[i] - x[n / 2]);
+    ans += abs(y[i] - y[n / 2]);
   }
-
-  sx = (sx + (n / 2)) / n;
-  sy = (sy + (n / 2)) / n;
-
-  ll ans = 0;
-  rep(i, 0, n) { ans += abs(sx - x[i]) + abs(sy - y[i]); }
   cout << ans << endl;
 }

@@ -21,22 +21,17 @@ template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } retu
 #pragma endregion Template  // clang-format on
 
 int main() {
-  ll n;
+  int n;
   cin >> n;
 
-  ll cnt = 0;
-  for (ll i = 2; i * i <= n; i++) {
-    while (n % i == 0) {
-      cnt++;
-      n /= i;
-    }
-  }
-  if (n != 1) cnt++;
+  vll x(n), y(n);
+  rep(i, 0, n) cin >> x[i] >> y[i];
 
-  rep(i, 0, 20) {
-    if ((1 << i) >= cnt) {
-      cout << i << endl;
-      return 0;
-    }
+  ll ans = 0;
+  rep(i, 0, n - 2) rep(j, i + 1, n - 1) rep(k, j + 1, n) {
+    if (!((x[i] - x[j]) * (y[i] - y[k]) == (x[i] - x[k]) * (y[i] - y[j])))
+      ans++;
   }
+
+  cout << ans << endl;
 }

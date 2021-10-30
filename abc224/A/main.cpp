@@ -21,22 +21,11 @@ template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } retu
 #pragma endregion Template  // clang-format on
 
 int main() {
-  ll n;
-  cin >> n;
+  string s;
+  cin >> s;
 
-  ll cnt = 0;
-  for (ll i = 2; i * i <= n; i++) {
-    while (n % i == 0) {
-      cnt++;
-      n /= i;
-    }
-  }
-  if (n != 1) cnt++;
-
-  rep(i, 0, 20) {
-    if ((1 << i) >= cnt) {
-      cout << i << endl;
-      return 0;
-    }
-  }
+  if (s.back() == 'r')
+    cout << "er" << endl;
+  else
+    cout << "ist" << endl;
 }

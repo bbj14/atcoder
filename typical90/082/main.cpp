@@ -1,4 +1,4 @@
-#pragma region Template // clang-format off
+#pragma region Template  // clang-format off
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>
@@ -18,10 +18,9 @@ using vs = vector<string>;
 using pii = pair<int,int>;
 template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
-#pragma endregion Template // clang-format on
+#pragma endregion Template  // clang-format on
 
 const long long MOD = 1000000007;
+using mint = modint1000000007;
 
-int main() {
-  
-}
+int main() {}

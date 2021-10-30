@@ -20,23 +20,23 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } retu
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 #pragma endregion Template  // clang-format on
 
+const string YES = "Yes";
+const string NO = "No";
+
 int main() {
-  ll n;
-  cin >> n;
+  int h, w;
+  cin >> h >> w;
 
-  ll cnt = 0;
-  for (ll i = 2; i * i <= n; i++) {
-    while (n % i == 0) {
-      cnt++;
-      n /= i;
+  vvi a(h, vi(w));
+  rep(i, 0, h) rep(j, 0, w) cin >> a[i][j];
+
+  bool ok = true;
+  rep(i1, 0, h - 1) rep(i2, i1 + 1, h) rep(j1, 0, w - 1) rep(j2, j1 + 1, w) {
+    if (!(a[i1][j1] + a[i2][j2] <= a[i2][j1] + a[i1][j2])) {
+      ok = false;
+      break;
     }
   }
-  if (n != 1) cnt++;
 
-  rep(i, 0, 20) {
-    if ((1 << i) >= cnt) {
-      cout << i << endl;
-      return 0;
-    }
-  }
+  if (ok) yesno;
 }
