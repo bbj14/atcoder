@@ -20,29 +20,37 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } retu
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 #pragma endregion Template  // clang-format on
 
-int main() {
-  int n, k;
-  cin >> n >> k;
-  string s;
-  cin >> s;
+map<int, bool> used;
 
-  string ans = "z";
+void dfs(vvi &G, int v) {
+  used[v] = true;
+  for (auto nv : G[v]) {
+    if (used[nv]) continue;
+    dfs(G, nv);
+  }
+}
+
+int main() {
+  int n;
+  cin >> n;
+  vi t(n), k(n);
+  vvi a(n);
 
   rep(i, 0, n) {
-    auto p = upper_bound(all(ans), s[i]);
-    int d = p - ans.begin();
-    if (ans.end() != p) {
-      if (k - d >= n - i) {
-        ans.erase(k - (n - i));
-        ans += s.substr(i);
-        break;
-      }
-      *p = s[i];
-      ans.erase(p + 1, ans.end());
-    } else if (ans.length() < k) {
-      ans += s[i];
+    cin >> t[i] >> k[i];
+    rep(j, 0, k[i]) {
+      int x;
+      cin >> x;
+      x--;
+      a[i].push_back(x);
     }
   }
 
+  dfs(a, n - 1);
+
+  ll ans = 0;
+  for (auto [i, v] : used) {
+    ans += t[i];
+  }
   cout << ans << endl;
 }

@@ -1,6 +1,3 @@
-#include <bits/stdc++.h>
-using namespace std;
-
 // めぐる式
 int binary() {
   int ok = 0, ng = 1;

@@ -20,29 +20,42 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } retu
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 #pragma endregion Template  // clang-format on
 
+const long long MOD = 998244353;
+
 int main() {
-  int n, k;
-  cin >> n >> k;
-  string s;
-  cin >> s;
+  ll n, m;
+  cin >> n >> m;
 
-  string ans = "z";
+  dsu d(n);
+  vi e(n);
 
-  rep(i, 0, n) {
-    auto p = upper_bound(all(ans), s[i]);
-    int d = p - ans.begin();
-    if (ans.end() != p) {
-      if (k - d >= n - i) {
-        ans.erase(k - (n - i));
-        ans += s.substr(i);
-        break;
-      }
-      *p = s[i];
-      ans.erase(p + 1, ans.end());
-    } else if (ans.length() < k) {
-      ans += s[i];
-    }
+  rep(i, 0, m) {
+    ll u, v;
+    cin >> u >> v;
+    u--, v--;
+    e[u]++;
+
+    d.merge(u, v);
   }
 
-  cout << ans << endl;
+  vi cntV(n), cntE(n);
+
+  rep(i, 0, n) {
+    cntV[d.leader(i)]++;
+    cntE[d.leader(i)] += e[i];
+  }
+
+  ll cnt = 0;
+  rep(i, 0, n) {
+    if (cntV[i] == 0) continue;
+    if (cntV[i] != cntE[i]) {
+      cout << 0 << endl;
+      return 0;
+    }
+    cnt++;
+  }
+
+  cout << "test" << endl;
+
+  cout << pow_mod(2LL, cnt, MOD) << endl;
 }

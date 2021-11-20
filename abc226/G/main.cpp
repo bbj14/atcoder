@@ -1,4 +1,4 @@
-#pragma region Template  // clang-format off
+#pragma region Template // clang-format off
 #include <bits/stdc++.h>
 using namespace std;
 #include <atcoder/all>
@@ -18,31 +18,11 @@ using vs = vector<string>;
 using pii = pair<int,int>;
 template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
-#pragma endregion Template  // clang-format on
+#pragma endregion Template // clang-format on
+
+const string YES = "Yes";
+const string NO = "No";
 
 int main() {
-  int n, k;
-  cin >> n >> k;
-  string s;
-  cin >> s;
-
-  string ans = "z";
-
-  rep(i, 0, n) {
-    auto p = upper_bound(all(ans), s[i]);
-    int d = p - ans.begin();
-    if (ans.end() != p) {
-      if (k - d >= n - i) {
-        ans.erase(k - (n - i));
-        ans += s.substr(i);
-        break;
-      }
-      *p = s[i];
-      ans.erase(p + 1, ans.end());
-    } else if (ans.length() < k) {
-      ans += s[i];
-    }
-  }
-
-  cout << ans << endl;
+  
 }
