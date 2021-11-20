@@ -1,12 +1,12 @@
 #pragma region Template  // clang-format off
 #include <bits/stdc++.h>
+using namespace std;
 #include <atcoder/all>
+using namespace atcoder;
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
-using namespace std;
-using namespace atcoder;
 #define REP(i,n) for (int i = 0; i < (int)(n); i++)
-#define RREP(i,n) for (int i = n; i > 0; i--)
+#define RREP(i,n) for (int i = n-1; i >= 0; i--)
 #define FOR(i, m, n) for (int i = m; i < (int)(n); i++)
 #define ALL(x) (x).begin(),(x).end()
 #define YESNO {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
@@ -29,14 +29,16 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } retu
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 #pragma endregion Template  // clang-format on
 
-{ % if mod % }
-const long long MOD = {{mod}};
-{ % endif % } { % if yes_str % }
+{% if mod %}
+const long long MOD = {{ mod }};
+{% endif %}
+{% if yes_str %}
 const string YES = "{{ yes_str }}";
-{ % endif % } { % if no_str % }
+{% endif %}
+{% if no_str %}
 const string NO = "{{ no_str }}";
-{ % endif % }
+{% endif %}
 
 signed main() {
-
+	
 }

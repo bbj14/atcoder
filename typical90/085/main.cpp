@@ -5,41 +5,31 @@ using namespace std;
 using namespace atcoder;
 #include <boost/multiprecision/cpp_dec_float.hpp>
 #include <boost/multiprecision/cpp_int.hpp>
-using bint = boost::multiprecision::cpp_int;
-#define rep(i, m, n) for (int i = m; i < (int)(n); i++)
-#define all(x) (x).begin(),(x).end()
-#define yesno {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
+#define REP(i,n) for (int i = 0; i < (int)(n); i++)
+#define RREP(i,n) for (int i = n-1; i >= 0; i--)
+#define FOR(i, m, n) for (int i = m; i < (int)(n); i++)
+#define ALL(x) (x).begin(),(x).end()
+#define YESNO {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
+#define int ll
 using ll = long long;
-using vi = vector<int>;
-using vvi = vector<vi>;
-using vll = vector<ll>;
-using vvll = vector<vll>;
-using vs = vector<string>;
-using pii = pair<int,int>;
+using ull = unsigned long long;
+using bint = boost::multiprecision::cpp_int;
+template <class T> using V = vector<T>;
+template <class T> using VV = V<V<T>>;
+using VI = V<int>;
+using VVI = VV<int>;
+using VS = V<string>;
+using VB = V<bool>;
+using PII = pair<int,int>;
+using MII = map<int,int>;
+void CIN() {}; template <class T, class... U> void CIN(T &&x, U &&...y) {cin >> x; CIN(forward<U>(y)...);}
+void _COUT() { cout << '\n'; } template <class T, class... U> void _COUT(T &&x, U &&...y) {cout << ' ' << x; _COUT(forward<U>(y)...);}
+void COUT() { _COUT(); }; template <class T, class... U> void COUT(T &&x, U &&...y) {cout << x; _COUT(forward<U>(y)...);}
 template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } return 0; }
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 #pragma endregion Template  // clang-format on
 
-int main() {
-  ll k;
-  cin >> k;
 
-  vll a;
-  a.push_back(1);
-  for (ll i = 2; i * i <= k; i++) {
-    if (k % i == 0) {
-      a.push_back(i);
-      a.push_back(k / i);
-    }
-  }
-  sort(all(a));
-
-  ll ans = 0;
-  rep(i, 0, a.size()) rep(j, i, a.size()) {
-    if ((k % a[i] == 0) && (k / a[i] % a[j] == 0) &&
-        (k / a[i] / a[j] >= a[j])) {
-      ans++;
-    }
-  }
-  cout << ans << endl;
+signed main() {
+	
 }
