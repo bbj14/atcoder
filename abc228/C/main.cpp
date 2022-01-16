@@ -29,24 +29,31 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } retu
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 #pragma endregion Template  // clang-format on
 
+const string YES = "Yes";
+const string NO = "No";
+
 signed main() {
-  int n, k;
-  CIN(n, k);
-  VVI c(5001, VI(5001));
-  REP(i, n) {
-    int a, b;
-    CIN(a, b);
-    c[a][b]++;
-  }
+	int n,k;
+	CIN(n,k);
+	
+	V<PII> sum(n);
+	REP(i, n) {
+		int a,b,c;
+		CIN(a,b,c);
+		sum[i] = {a+b+c, i};
+	}
 
-  REP(i, 5000) REP(j, 5000) c[i + 1][j] += c[i][j];
-  REP(i, 5000) REP(j, 5000) c[i][j + 1] += c[i][j];
+	sort(sum.rbegin(), sum.rend());
 
-  int ans = 0;
-  FOR(i, 1, 5000 - k)
-  FOR(j, 1, 5000 - k)
-  chmax(ans,
-        c[i + k][j + k] - c[i + k][j - 1] - c[i - 1][j + k] + c[i - 1][j - 1]);
+	int p = sum[k-1].first;
 
-  COUT(ans);
+	MII mp;
+
+	for(auto [point, i]: sum) {
+		if (point + 300 >= p) mp[i]++;
+	}
+
+	REP(i, n) {
+		if (mp[i]) YESNO;
+	}
 }

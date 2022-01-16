@@ -9,6 +9,7 @@ using namespace atcoder;
 #define RREP(i,n) for (int i = n-1; i >= 0; i--)
 #define FOR(i, m, n) for (int i = m; i < (int)(n); i++)
 #define ALL(x) (x).begin(),(x).end()
+#define RALL(x) (x).rbegin(),(x).rend()
 #define YESNO {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
 #define int ll
 using ll = long long;
@@ -30,23 +31,28 @@ template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } retu
 #pragma endregion Template  // clang-format on
 
 signed main() {
-  int n, k;
-  CIN(n, k);
-  VVI c(5001, VI(5001));
-  REP(i, n) {
-    int a, b;
-    CIN(a, b);
-    c[a][b]++;
+  string s;
+  CIN(s);
+  int k;
+  CIN(k);
+  int le = 0;
+  int cnt = 0, ans = 0;
+  VI dot;
+  REP(i, s.size()) {
+    if (s[i] == '.') dot.push_back(i);
   }
+  reverse(ALL(dot));
 
-  REP(i, 5000) REP(j, 5000) c[i + 1][j] += c[i][j];
-  REP(i, 5000) REP(j, 5000) c[i][j + 1] += c[i][j];
-
-  int ans = 0;
-  FOR(i, 1, 5000 - k)
-  FOR(j, 1, 5000 - k)
-  chmax(ans,
-        c[i + k][j + k] - c[i + k][j - 1] - c[i - 1][j + k] + c[i - 1][j - 1]);
-
+  REP(i, s.size()) {
+    if (s[i] == '.') {
+      if (k == 0) {
+        le = dot.back() + 1;
+        dot.pop_back();
+      } else {
+        k--;
+      }
+    }
+    chmax(ans, i - le + 1);
+  }
   COUT(ans);
 }

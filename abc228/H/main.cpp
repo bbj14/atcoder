@@ -29,24 +29,28 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } retu
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 #pragma endregion Template  // clang-format on
 
+const int MOD = 1048576;
+
 signed main() {
-  int n, k;
-  CIN(n, k);
-  VVI c(5001, VI(5001));
-  REP(i, n) {
-    int a, b;
-    CIN(a, b);
-    c[a][b]++;
-  }
+	VI a(1 << 20, -1);
 
-  REP(i, 5000) REP(j, 5000) c[i + 1][j] += c[i][j];
-  REP(i, 5000) REP(j, 5000) c[i][j + 1] += c[i][j];
+	int q;
+	CIN(q);
+	
+	REP(i, q) {
+		int t,x;
+		CIN(t,x);
 
-  int ans = 0;
-  FOR(i, 1, 5000 - k)
-  FOR(j, 1, 5000 - k)
-  chmax(ans,
-        c[i + k][j + k] - c[i + k][j - 1] - c[i - 1][j + k] + c[i - 1][j - 1]);
-
-  COUT(ans);
+		int h = x % MOD;
+		
+		if (t==1) {
+			while(a[h] != -1) {
+				h += 1;
+				h %= MOD;
+			}
+			a[h] = x;
+		} else {
+			COUT(a[h]);
+		}
+	}
 }

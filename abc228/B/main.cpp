@@ -30,23 +30,22 @@ template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } retu
 #pragma endregion Template  // clang-format on
 
 signed main() {
-  int n, k;
-  CIN(n, k);
-  VVI c(5001, VI(5001));
-  REP(i, n) {
-    int a, b;
-    CIN(a, b);
-    c[a][b]++;
-  }
+  int n, x;
+  CIN(n, x);
+	x--;
 
-  REP(i, 5000) REP(j, 5000) c[i + 1][j] += c[i][j];
-  REP(i, 5000) REP(j, 5000) c[i][j + 1] += c[i][j];
+  VI a(n);
+  REP(i, n) CIN(a[i]);
+  REP(i, n) a[i]--;
+
+  VI seen(n);
 
   int ans = 0;
-  FOR(i, 1, 5000 - k)
-  FOR(j, 1, 5000 - k)
-  chmax(ans,
-        c[i + k][j + k] - c[i + k][j - 1] - c[i - 1][j + k] + c[i - 1][j - 1]);
+  while (seen[x] == 0) {
+    seen[x] = 1;
+    ans++;
+    x = a[x];
+  }
 
   COUT(ans);
 }

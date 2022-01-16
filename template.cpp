@@ -9,6 +9,7 @@ using namespace atcoder;
 #define RREP(i,n) for (int i = n-1; i >= 0; i--)
 #define FOR(i, m, n) for (int i = m; i < (int)(n); i++)
 #define ALL(x) (x).begin(),(x).end()
+#define RALL(x) (x).rbegin(),(x).rend()
 #define YESNO {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
 #define int ll
 using ll = long long;

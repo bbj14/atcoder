@@ -9,6 +9,7 @@ using namespace atcoder;
 #define RREP(i,n) for (int i = n-1; i >= 0; i--)
 #define FOR(i, m, n) for (int i = m; i < (int)(n); i++)
 #define ALL(x) (x).begin(),(x).end()
+#define RALL(x) (x).rbegin(),(x).rend()
 #define YESNO {cout<<"Yes"<<endl;}else{cout<<"No"<<endl;}
 #define int ll
 using ll = long long;
@@ -29,24 +30,24 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } retu
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 #pragma endregion Template  // clang-format on
 
+const string YES = "Yes";
+const string NO = "No";
+
 signed main() {
-  int n, k;
-  CIN(n, k);
-  VVI c(5001, VI(5001));
-  REP(i, n) {
-    int a, b;
-    CIN(a, b);
-    c[a][b]++;
+  string s1, s2;
+  CIN(s1, s2);
+
+  int cnt = 0;
+  if (s1[0] == '.') cnt++;
+  if (s1[1] == '.') cnt++;
+  if (s2[0] == '.') cnt++;
+  if (s2[1] == '.') cnt++;
+
+  if (cnt == 2) {
+    if ((s1[0] == '.' && s2[1] == '.') || s1[1] == '.' && s2[0] == '.') {
+      COUT(NO);
+      return 0;
+    }
   }
-
-  REP(i, 5000) REP(j, 5000) c[i + 1][j] += c[i][j];
-  REP(i, 5000) REP(j, 5000) c[i][j + 1] += c[i][j];
-
-  int ans = 0;
-  FOR(i, 1, 5000 - k)
-  FOR(j, 1, 5000 - k)
-  chmax(ans,
-        c[i + k][j + k] - c[i + k][j - 1] - c[i - 1][j + k] + c[i - 1][j - 1]);
-
-  COUT(ans);
+  COUT(YES);
 }
