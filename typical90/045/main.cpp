@@ -29,7 +29,35 @@ template<class T>bool chmax(T &a, const T &b) { if (a<b) { a=b; return 1; } retu
 template<class T>bool chmin(T &a, const T &b) { if (b<a) { a=b; return 1; } return 0; }
 #pragma endregion Template  // clang-format on
 
+const int INF = LONG_LONG_MAX - 1;
+
+int dist[15][15];
 
 signed main() {
-	
+  int n, k;
+  CIN(n, k);
+  VI x(n), y(n);
+  REP(i, n) CIN(x[i], y[i]);
+
+  VI d(1 << n);
+  VVI dp(k + 1, VI(1 << n, INF));
+
+  REP(i, n) REP(j, n) {
+    dist[i][j] = (x[i] - x[j]) * (x[i] - x[j]) + (y[i] - y[j]) * (y[i] - y[j]);
+  }
+
+  REP(i, 1 << n) REP(j, n) REP(m, j) {
+    if (i & (1 << j) && i & (1 << m)) chmax(d[i], dist[j][m]);
+  }
+
+  dp[0][0] = 0;
+
+  FOR(i, 1, k + 1) REP(j, 1 << n) {
+    for (int b = j;; b = (b - 1) & j) {
+      chmin(dp[i][j], max(dp[i - 1][b], d[j - b]));
+      if (b == 0) break;
+    }
+  }
+
+  COUT(dp[k][(1 << n) - 1]);
 }
